@@ -12,7 +12,7 @@ st.markdown('''
 # Rainfall Statistics and Analysis in India from 1901 to 2017
 This app retrieves rainfall data from **CSV FILE** and displays tables and so statistics taken from **[Rainfall data from government site](https://www.data.gov.in/catalog/rainfall-india)**.
 
-### **Python Libraries Used:**
+### **Python libraries Used:**
 - `streamlit`
 - `pandas`
 
