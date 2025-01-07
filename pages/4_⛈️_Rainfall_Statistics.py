@@ -7,6 +7,7 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
+
 st.markdown('''
 # Rainfall Statistics and Analysis in India from 1901 to 2017
 This app retrieves rainfall data from **CSV FILE** and displays tables and so statistics taken from **[Rainfall data from government site](https://www.data.gov.in/catalog/rainfall-india)**.
@@ -16,7 +17,8 @@ This app retrieves rainfall data from **CSV FILE** and displays tables and so st
 - `pandas`
 
 ### **Data Source:**
-* [Github File you can check](https://en.wikipedia.org/wiki/NIFTY_500) or you can download from [Rainfall data from government site](https://www.data.gov.in/catalog/rainfall-india)
+            
+* [Github File you can check](https://raw.githubusercontent.com/atul320/data_analytics/main/rainfall_sample.csv) or you can download from [Rainfall data from government site](https://www.data.gov.in/catalog/rainfall-india)
 ''')
 
 def load_data(file):
