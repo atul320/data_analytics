@@ -9,32 +9,31 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-st.write('''
-# Stock Price App
-Shown are the stock closing price and volume of selected stocks!
-''')
+st.write("## Stock Price App")
+st.write("Shown are the stock closing price and volume.")
 
-default_value = 'RELIANCE'
-user_input = st.text_input("Write Your Symbol", default_value).upper()
-tickerSymbol = f'{user_input}.NS'
+# Default stock symbol
+default_value = "RELIANCE"
+user_input = st.text_input("Write Your Symbol (e.g., RELIANCE)", default_value).upper()
+tickerSymbol = f"{user_input}.NS"
 
-current_year = datetime.now().year
-start_year = current_year - 10
-start_date = f"{start_year}-04-01"
-end_date = f"{current_year - 1}-03-31"
-
+# Fetch data
 try:
     tickerData = yf.Ticker(tickerSymbol)
-    tickerDf = tickerData.history(start=start_date, end=end_date)
+    tickerDf = tickerData.history(period="10y")  # Fetch last 10 years
 
     if tickerDf.empty:
         st.error("No data found for the given stock symbol. Try another one!")
     else:
-        st.write(f'### Closing Price: {tickerSymbol.upper()}')
+        st.write(f"### Closing Price: {tickerSymbol.upper()}")
         st.line_chart(tickerDf["Close"])
 
-        st.write(f'### Volume Traded: {tickerSymbol.upper()}')
+        st.write(f"### Volume Traded: {tickerSymbol.upper()}")
         st.line_chart(tickerDf["Volume"])
+
+        # Show raw data for debugging
+        st.write("#### Raw Data Preview")
+        st.dataframe(tickerDf.tail())
 
 except Exception as e:
     st.error(f"Error fetching data: {e}")
