@@ -28,7 +28,7 @@ st.markdown(circle_image_style, unsafe_allow_html=True)
 # Display image and name in a row
 st.markdown(f"""
 <div style="display: flex; align-items: center; gap: 10px;">
-    <img src="{image_url}" class="circular-image" alt="Atul Bhardwaj">
+    <img src="{image_url}" class="circular-image">
     <h2>Atul Bhardwaj</h2>
 </div>
 """, unsafe_allow_html=True)
