@@ -34,6 +34,6 @@ I am Atul Bhardwaj, a dedicated and results-driven professional with a Master's 
 
 Here, I am learning by doing hands-on projects,  where I applied data analytics skills to track, compare, and visualize stock market trends. These projects enhanced my analytical thinking and provided real-time insights into financial markets, further solidifying my skills in Python programming, data manipulation, and visualization tools. In addition to my technical expertise, I am well-versed in Agile environments and continuously strive to improve my knowledge through various internships, courses, and certifications.
 
-With a keen interest in data analytics, software development, and a proactive learning approach, I aim to leverage my skills to contribute effectively in a challenging and growth-oriented role.
+With a keen interest in data analytics, software development, and a proactive learning approach, I aim to leverage my skills to contribute effectively in a challenging and growth-oriented role ENJOY!!!.
 
 ''',unsafe_allow_html=True)
