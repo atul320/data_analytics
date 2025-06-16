@@ -1,91 +1,77 @@
 import streamlit as st
-from PIL import Image
 import requests
 from io import BytesIO
+from PIL import Image
 
 # Page configuration
 st.set_page_config(
     page_title="DATA ANALYTICS",
     page_icon="🙋‍♂️",
-    initial_sidebar_state="auto",
-    layout="centered"
+    initial_sidebar_state="auto"
 )
 
-# Custom CSS for styling
-st.markdown("""
+# Function to load image with persistent caching
+@st.cache_data(ttl=3600)  # Cache for 1 hour
+def load_image_from_drive():
+    try:
+        # Direct Google Drive image URL
+        image_url = "https://drive.google.com/uc?export=view&id=12mFpRvjSkwVf85RdyZj1TBet6m-WlJop"
+        response = requests.get(image_url, stream=True)
+        response.raise_for_status()
+        return Image.open(BytesIO(response.content))
+    except:
+        return None
+
+# Load the image
+profile_img = load_image_from_drive()
+
+# CSS for circular image
+circle_image_style = """
 <style>
-    .circular-image {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #4f8bf9;
-    }
-    .header-container {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-    .social-icon {
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-    .intro-text {
-        text-align: justify;
-        line-height: 1.6;
-    }
+.circular-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4f8bf9;
+}
 </style>
-""", unsafe_allow_html=True)
+"""
+st.markdown(circle_image_style, unsafe_allow_html=True)
 
-# Header Section
-col1, col2 = st.columns([1, 4])
-with col1:
-    # Using a placeholder image (replace with your actual image URL)
-    image_url = "https://placehold.co/150x150"
-    st.markdown(f"""
-    <div style="display: flex; justify-content: center;">
-        <img src="{image_url}" class="circular-image">
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
+# Display section
+if profile_img:
+    # Display using st.image() for reliability
+    col1, col2 = st.columns([1, 4])
+    with col1:
+        st.image(profile_img, width=100, use_column_width=False)
+    with col2:
+        st.markdown("<h2>Atul Bhardwaj</h2>", unsafe_allow_html=True)
+else:
+    # Fallback that doesn't show placeholder
     st.markdown("""
-    <div style="margin-top: 10px;">
+    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
         <h2>Atul Bhardwaj</h2>
-        <p style="color: #6c757d; margin-top: -10px;">Data Analyst | Full Stack Developer</p>
     </div>
     """, unsafe_allow_html=True)
 
-# Main Content
+# Page title
 st.title("Home")
 
-# Social links with better formatting
-st.markdown("""
-### Connect With Me ⛓️‍💥
-<div style="margin-bottom: 30px;">
-    <a href="https://www.linkedin.com/in/atul-bhardwaj-40041a1aa" target="_blank" style="text-decoration: none;">
-        <img src="https://cdn-icons-png.flaticon.com/24/174/174857.png" class="social-icon"> LinkedIn
-    </a> &nbsp; | &nbsp;
-    <a href="https://github.com/atul320" target="_blank" style="text-decoration: none;">
-        <img src="https://cdn-icons-png.flaticon.com/24/733/733553.png" class="social-icon"> GitHub
-    </a> &nbsp; | &nbsp;
-    <a href="mailto:bhardwajatul320@gmail.com" style="text-decoration: none;">
-        <img src="https://cdn-icons-png.flaticon.com/24/281/281764.png" class="social-icon"> Email
-    </a>
-</div>
-""", unsafe_allow_html=True)
+# Social links and intro (maintaining your original bullet-point format)
+st.markdown('''
+### Connect ⛓️‍💥 and Follow!
+* ![Linkedin](https://cdn-icons-png.flaticon.com/24/174/174857.png) &nbsp; [LinkedIn](https://www.linkedin.com/in/atul-bhardwaj-40041a1aa)
+* ![GitHub](https://cdn-icons-png.flaticon.com/24/733/733553.png) &nbsp; [GitHub](https://github.com/atul320)
+* ![Gmail](https://cdn-icons-png.flaticon.com/24/281/281764.png) &nbsp; [Gmail](mailto:bhardwajatul320@gmail.com)
 
-# Introduction section
-st.markdown("""
-### 🚀 About My Data Analytics Journey
-
-<div class="intro-text">
+### Hi, This is My Python Streamlit and Data Analytics Learning Playground
 I am Atul Bhardwaj, a dedicated and results-driven professional with a Master's degree in Computer Applications from Gautam Buddha University and a Bachelor's degree in Computer Applications from G.L Bajaj Institute of Technology & Management.
-
 With a strong foundation in software development, data analytics, and front-end technologies, I have worked in dynamic environments like Kalkine Consultancy India Private Limited, where I contributed to optimizing web platforms and enhancing user experiences.
+I am proficient in Java, Python, JavaScript, React.js, Node.js, MySQL, and other related technologies.
+Here, I am learning by doing hands-on projects where I apply data analytics skills to track, compare, and visualize stock market trends. These projects enhance my analytical thinking and provide real-time insights into financial markets, further solidifying my skills in Python programming, data manipulation, and visualization tools.
+In addition to my technical expertise, I am well-versed in Agile environments and continuously strive to improve my knowledge through various internships, courses, and certifications.
+With a keen interest in data analytics, software development, and a proactive learning approach, I aim to leverage my skills to contribute effectively in a challenging and growth-oriented role.
 
 I am proficient in:
 - **Programming**: Java, Python, JavaScript
@@ -93,13 +79,5 @@ I am proficient in:
 - **Databases**: MySQL, MongoDB
 - **Data Tools**: FastAPI, Matplotlib, Streamlit
 
-Here, I am learning by doing hands-on projects where I apply data analytics skills to track, compare, and visualize stock market trends. These projects enhance my analytical thinking and provide real-time insights into financial markets, further solidifying my skills in Python programming, data manipulation, and visualization tools.
-
-With a keen interest in data analytics, software development, and a proactive learning approach, I aim to leverage my skills to contribute effectively in a challenging and growth-oriented role.
-</div>
-
-**ENJOY EXPLORING MY WORK!** ✨
-""", unsafe_allow_html=True)
-
-# Add some space at the bottom
-st.markdown("<br><br>", unsafe_allow_html=True)
+**ENJOY!!!**
+''', unsafe_allow_html=True)
