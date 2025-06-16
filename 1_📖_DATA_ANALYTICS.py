@@ -18,7 +18,7 @@ circle_image_style = """
 """
 
 st.markdown(circle_image_style, unsafe_allow_html=True)
-image_url = "https://drive.google.com/file/d/12mFpRvjSkwVf85RdyZj1TBet6m-WlJop/view?usp=drive_link"
+image_url = "image_url = "https://drive.google.com/uc?export=view&id=12mFpRvjSkwVf85RdyZj1TBet6m-WlJop"
 
 
 st.title("Home")
