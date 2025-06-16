@@ -17,13 +17,14 @@ circle_image_style = """
 </style>
 """
 
-st.markdown(circle_image_style, unsafe_allow_html=True)
-image_url = "https://drive.google.com/uc?export=view&id=12mFpRvjSkwVf85RdyZj1TBet6m-WlJop"
-
+st.markdown(f"""
+<div style="display: flex; align-items: center; gap: 10px;">
+    <img src="{image_url}" class="circular-image" alt="Atul Bhardwaj">
+    <h2>Atul Bhardwaj</h2>
+</div>
+""", unsafe_allow_html=True)
 
 st.title("Home")
-st.markdown(f'''
-# <img src="{image_url}" class="circular-image"> Atul Bhardwaj
 ### Connect ⛓️‍💥 and Follow!
 * ![Linkedin](https://cdn-icons-png.flaticon.com/24/174/174857.png) &nbsp; [LinkedIn](https://www.linkedin.com/in/atul-bhardwaj-40041a1aa)
 * ![GitHub](https://cdn-icons-png.flaticon.com/24/733/733553.png) &nbsp; [GitHub](https://github.com/atul320)
