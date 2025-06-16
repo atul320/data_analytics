@@ -28,12 +28,17 @@ profile_img = load_image_from_drive()
 # CSS for circular image
 circle_image_style = """
 <style>
-.circular-image {
+.circular-image-container {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    object-fit: cover;
+    overflow: hidden;
     border: 2px solid #4f8bf9;
+}
+.circular-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>
 """
@@ -44,7 +49,11 @@ if profile_img:
     # Display using st.image() for reliability
     col1, col2 = st.columns([1, 4])
     with col1:
-        st.image(profile_img, width=100, use_column_width=False)
+        st.markdown("""
+        <div class="circular-image-container">
+            <img src="https://drive.google.com/uc?export=view&id=12mFpRvjSkwVf85RdyZj1TBet6m-WlJop">
+        </div>
+        """, unsafe_allow_html=True)
     with col2:
         st.markdown("<h2>Atul Bhardwaj</h2>", unsafe_allow_html=True)
 else:
@@ -66,18 +75,22 @@ st.markdown('''
 * ![Gmail](https://cdn-icons-png.flaticon.com/24/281/281764.png) &nbsp; [Gmail](mailto:bhardwajatul320@gmail.com)
 
 ### Hi, This is My Python Streamlit and Data Analytics Learning Playground
+
 I am Atul Bhardwaj, a dedicated and results-driven professional with a Master's degree in Computer Applications from Gautam Buddha University and a Bachelor's degree in Computer Applications from G.L Bajaj Institute of Technology & Management.
+
 With a strong foundation in software development, data analytics, and front-end technologies, I have worked in dynamic environments like Kalkine Consultancy India Private Limited, where I contributed to optimizing web platforms and enhancing user experiences.
-I am proficient in Java, Python, JavaScript, React.js, Node.js, MySQL, and other related technologies.
-Here, I am learning by doing hands-on projects where I apply data analytics skills to track, compare, and visualize stock market trends. These projects enhance my analytical thinking and provide real-time insights into financial markets, further solidifying my skills in Python programming, data manipulation, and visualization tools.
-In addition to my technical expertise, I am well-versed in Agile environments and continuously strive to improve my knowledge through various internships, courses, and certifications.
-With a keen interest in data analytics, software development, and a proactive learning approach, I aim to leverage my skills to contribute effectively in a challenging and growth-oriented role.
 
 I am proficient in:
 - **Programming**: Java, Python, JavaScript
 - **Web Technologies**: React.js, Node.js
 - **Databases**: MySQL, MongoDB
 - **Data Tools**: FastAPI, Matplotlib, Streamlit
+
+Here, I am learning by doing hands-on projects where I apply data analytics skills to track, compare, and visualize stock market trends. These projects enhance my analytical thinking and provide real-time insights into financial markets, further solidifying my skills in Python programming, data manipulation, and visualization tools.
+
+In addition to my technical expertise, I am well-versed in Agile environments and continuously strive to improve my knowledge through various internships, courses, and certifications.
+
+With a keen interest in data analytics, software development, and a proactive learning approach, I aim to leverage my skills to contribute effectively in a challenging and growth-oriented role.
 
 **ENJOY!!!**
 ''', unsafe_allow_html=True)
