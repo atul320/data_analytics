@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 # Define image URL (from Google Drive direct view link)
-image_url = "https://drive.google.com/uc?export=view&id=12mFpRvjSkwVf85RdyZj1TBet6m-WlJop"
+image_url = "https://via.placeholder.com/150"
 
 # CSS for circular image
 circle_image_style = """
