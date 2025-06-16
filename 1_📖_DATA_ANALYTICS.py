@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import base64
 from io import BytesIO
 from PIL import Image
 
@@ -10,20 +11,31 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-# Function to load image with persistent caching
-@st.cache_data(ttl=3600)  # Cache for 1 hour
-def load_image_from_drive():
+# Function to convert image to base64 with caching
+@st.cache_data(ttl=3600)
+def get_base64_image():
     try:
         # Direct Google Drive image URL
         image_url = "https://drive.google.com/uc?export=view&id=12mFpRvjSkwVf85RdyZj1TBet6m-WlJop"
-        response = requests.get(image_url, stream=True)
+        response = requests.get(image_url)
         response.raise_for_status()
-        return Image.open(BytesIO(response.content))
-    except:
+        
+        # Convert to base64
+        img_bytes = BytesIO(response.content)
+        img = Image.open(img_bytes)
+        
+        # Determine image format
+        img_format = img.format.lower() if img.format else 'jpeg'
+        
+        # Convert to base64 string
+        base64_str = base64.b64encode(response.content).decode('utf-8')
+        return f"data:image/{img_format};base64,{base64_str}"
+    except Exception as e:
+        st.error(f"Error loading image: {str(e)}")
         return None
 
-# Load the image
-profile_img = load_image_from_drive()
+# Get base64 encoded image
+base64_image = get_base64_image()
 
 # CSS for circular image
 circle_image_style = """
@@ -45,29 +57,21 @@ circle_image_style = """
 st.markdown(circle_image_style, unsafe_allow_html=True)
 
 # Display section
-if profile_img:
-    # Display using st.image() for reliability
-    col1, col2 = st.columns([1, 4])
-    with col1:
-        st.markdown("""
+col1, col2 = st.columns([1, 4])
+with col1:
+    if base64_image:
+        st.markdown(f"""
         <div class="circular-image-container">
-            <img src="https://drive.google.com/uc?export=view&id=12mFpRvjSkwVf85RdyZj1TBet6m-WlJop">
+            <img src="{base64_image}">
         </div>
         """, unsafe_allow_html=True)
-    with col2:
-        st.markdown("<h2>Atul Bhardwaj</h2>", unsafe_allow_html=True)
-else:
-    # Fallback that doesn't show placeholder
-    st.markdown("""
-    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-        <h2>Atul Bhardwaj</h2>
-    </div>
-    """, unsafe_allow_html=True)
+with col2:
+    st.markdown("<h2>Atul Bhardwaj</h2>", unsafe_allow_html=True)
 
 # Page title
 st.title("Home")
 
-# Social links and intro (maintaining your original bullet-point format)
+# Social links and intro
 st.markdown('''
 ### Connect ⛓️‍💥 and Follow!
 * ![Linkedin](https://cdn-icons-png.flaticon.com/24/174/174857.png) &nbsp; [LinkedIn](https://www.linkedin.com/in/atul-bhardwaj-40041a1aa)
