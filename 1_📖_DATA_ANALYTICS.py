@@ -18,7 +18,7 @@ circle_image_style = """
 """
 
 st.markdown(circle_image_style, unsafe_allow_html=True)
-image_url = "https://media.licdn.com/dms/image/v2/D4E03AQFuci5tBBQchA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1634408994881?e=1741824000&v=beta&t=j0Z7PL0PSQiT9RBDfswwoWxJEH9SEPXcDtU_ysbhBbs"
+image_url = "https://drive.google.com/file/d/12mFpRvjSkwVf85RdyZj1TBet6m-WlJop/view?usp=drive_link"
 
 
 st.title("Home")
